@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Juned Alam | Senior Java Developer</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#38bdf8', // Sky-400
+                        brandDark: '#0ea5e9', // Sky-500
+                        bgDark: '#0f172a', // Slate-900
+                        cardDark: '#1e293b', // Slate-800
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* TIMELINE STYLES */
+        .timeline-container {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        /* The Vertical Line */
+        .timeline-line {
+            position: absolute;
+            left: 20px; /* Mobile position */
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #38bdf8, #818cf8, transparent);
+            border-radius: 2px;
+        }
+
+        /* Timeline Item */
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            padding-left: 60px; /* Space for the line/dot */
+        }
+
+        /* The Dot on the Line */
+        .timeline-dot {
+            position: absolute;
+            left: 6px; /* Center on the 4px line (20px left + 2px half-width - 16px half-dot) */
+            top: 0;
+            width: 32px;
+            height: 32px;
+            background: #0f172a;
+            border: 4px solid #38bdf8;
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+            transition: transform 0.3s ease;
+        }
+        
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.2);
+            background: #38bdf8;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Desktop Adjustments */
+        @media (min-width: 768px) {
+            .timeline-line {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .timeline-item {
+                width: 50%;
+                padding-left: 0;
+                padding-right: 50px;
+                left: 0;
+                text-align: right;
+            }
+            .timeline-item:nth-child(even) {
+                left: 50%;
+                padding-left: 50px;
+                padding-right: 0;
+                text-align: left;
+            }
+            .timeline-dot {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            /* Arrow for Left Side */
+            .timeline-item:nth-child(odd) .glass-card::before {
+                content: " ";
+                position: absolute;
+                top: 10px;
+                right: -10px;
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+                border-left: 10px solid rgba(30, 41, 59, 0.6);
+            }
+            /* Arrow for Right Side */
+            .timeline-item:nth-child(even) .glass-card::before {
+                content: " ";
+                position: absolute;
+                top: 10px;
+                left: -10px;
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+                border-right: 10px solid rgba(30, 41, 59, 0.6);
+            }
+        }
+
+        /* Loader */
+        #loader {
+            position: fixed; inset: 0; background: #0f172a; z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .spinner {
+            width: 50px; height: 50px; border: 4px solid #1e293b;
+            border-top: 4px solid #38bdf8; border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+        
+        /* Chatbot */
+        .chat-window {
+            background: #1e293b; border: 1px solid #334155;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="selection:bg-brand selection:text-white">
+
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <nav class="fixed w-full z-50 bg-bgDark/80 backdrop-blur-md border-b border-white/5">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tight text-white">
+                JUNED<span class="text-brand">.DEV</span>
+            </a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+                <a href="#home" class="hover:text-brand transition">Home</a>
+                <a href="#about" class="hover:text-brand transition">About</a>
+                <a href="#skills" class="hover:text-brand transition">Skills</a>
+                <a href="#experience" class="hover:text-brand transition">Experience</a>
+                <a href="#contact" class="hover:text-brand transition">Contact</a>
+            </div>
+            <button class="md:hidden text-2xl text-white"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2"></div>
+
+        <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div data-aos="fade-right">
+                <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-brand uppercase bg-brand/10 rounded-full border border-brand/20">
+                    Open to Work
+                </div>
+                <h1 class="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                    Mohammad <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-purple-400">Juned Alam</span>
+                </h1>
+                <h2 class="text-2xl text-slate-400 mb-6 font-light">Senior Full Stack Java Developer</h2>
+                <p class="text-lg text-slate-400 mb-8 max-w-lg leading-relaxed">
+                    [cite_start]Specializing in **Microservices**, **Spring Boot**, and **Angular**[cite: 8]. I build scalable, high-availability systems for Fortune 500 clients.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact" class="px-8 py-3 bg-brand text-bgDark font-bold rounded-lg hover:bg-brandDark transition shadow-lg shadow-brand/20">
+                        Hire Me
+                    </a>
+                    <a href="#experience" class="px-8 py-3 border border-slate-600 text-white rounded-lg hover:bg-white/5 transition">
+                        View Journey
+                    </a>
+                </div>
+                <div class="mt-8 flex gap-6 text-2xl text-slate-500">
+                    <a href="https://github.com/TechHorizonsByluned" class="hover:text-white transition"><i class="devicon-github-original"></i></a>
+                    <a href="https://www.linkedin.com/in/moh-juned-alam-97336416b" class="hover:text-brand transition"><i class="devicon-linkedin-plain"></i></a>
+                    <a href="mailto:juned.alam.dev@gmail.com" class="hover:text-white transition"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+
+            <div class="relative flex justify-center" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="w-80 h-80 lg:w-[450px] lg:h-[450px] relative">
+                    <div class="absolute inset-0 border-2 border-dashed border-slate-700 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                    <div class="absolute inset-4 bg-gradient-to-tr from-brand to-purple-600 rounded-full blur-2xl opacity-20"></div>
+                    <div class="absolute inset-4 rounded-full overflow-hidden border-4 border-slate-800 shadow-2xl z-10">
+                        <img src="https://ui-avatars.com/api/?name=Juned+Alam&background=0f172a&color=38bdf8&size=512&font-size=0.33" alt="Juned Alam" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4 bg-slate-800 p-3 rounded-xl border border-slate-700 shadow-lg">
+                        <i class="devicon-java-plain text-4xl text-red-500"></i>
+                    </div>
+                    <div class="absolute bottom-10 right-0 bg-slate-800 p-3 rounded-xl border border-slate-700 shadow-lg">
+                        <i class="devicon-angularjs-plain text-4xl text-red-600"></i>
+                    </div>
+                    <div class="absolute bottom-10 left-0 bg-slate-800 p-3 rounded-xl border border-slate-700 shadow-lg">
+                        <i class="devicon-docker-plain text-4xl text-blue-500"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-24 bg-bgDark relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-white mb-4">Professional Journey</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-brand to-purple-500 mx-auto rounded-full"></div>
+                [cite_start]<p class="text-slate-400 mt-4">10+ Years of Experience across Telecom, Finance, and eCommerce [cite: 8, 12]</p>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot">
+                        <i class="fas fa-briefcase text-brand text-xs"></i>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl hover:border-brand/50 transition duration-300">
+                        <span class="inline-block px-3 py-1 bg-brand/10 text-brand text-xs font-bold rounded-full mb-3">2023 - 2025</span>
+                        <h3 class="text-2xl font-bold text-white mb-1">Senior Full Stack Java Developer</h3>
+                        <h4 class="text-lg text-slate-300 mb-4">Miratech | US Client (Beverages)</h4>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                            Developed a full-featured eCommerce platform from scratch. [cite_start]Focused on high availability and microservices architecture[cite: 22, 25, 27].
+                        </p>
+                        <ul class="text-sm text-slate-400 space-y-2 text-left">
+                            [cite_start]<li class="flex items-start"><i class="fas fa-check text-brand mt-1 mr-2"></i> Built cart systems using Angular & Spring Boot[cite: 35].</li>
+                            [cite_start]<li class="flex items-start"><i class="fas fa-check text-brand mt-1 mr-2"></i> Achieved 99.99% uptime during sales events[cite: 42].</li>
+                            [cite_start]<li class="flex items-start"><i class="fas fa-check text-brand mt-1 mr-2"></i> Implemented OAuth 2.0 & Redis Caching[cite: 36, 37].</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot">
+                        <i class="fas fa-code text-brand text-xs"></i>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl hover:border-brand/50 transition duration-300">
+                        <span class="inline-block px-3 py-1 bg-purple-500/10 text-purple-400 text-xs font-bold rounded-full mb-3">2022 - 2023</span>
+                        <h3 class="text-2xl font-bold text-white mb-1">Senior Full Stack Developer</h3>
+                        <h4 class="text-lg text-slate-300 mb-4">Centric Consulting | PepsiCo Retail360</h4>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                            [cite_start]Worked on the Retail360 project for PepsiCo, focusing on MVP development and lost sales recovery[cite: 47, 49].
+                        </p>
+                        <ul class="text-sm text-slate-400 space-y-2 text-left">
+                            [cite_start]<li class="flex items-start"><i class="fas fa-check text-brand mt-1 mr-2"></i> Recovered lost sales via Kafka Streams alerts[cite: 60].</li>
+                            [cite_start]<li class="flex items-start"><i class="fas fa-check text-brand mt-1 mr-2"></i> Managed cart state with NgRx & Spring Data JPA[cite: 61].</li>
+                            [cite_start]<li class="flex items-start"><i class="fas fa-check text-brand mt-1 mr-2"></i> Boosted conversions by 25% via Analytics[cite: 63].</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot">
+                        <i class="fas fa-server text-brand text-xs"></i>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl hover:border-brand/50 transition duration-300">
+                        <span class="inline-block px-3 py-1 bg-brand/10 text-brand text-xs font-bold rounded-full mb-3">2020 - 2022</span>
+                        <h3 class="text-2xl font-bold text-white mb-1">Senior Full-Stack Engineer</h3>
+                        <h4 class="text-lg text-slate-300 mb-4">Maestro Digital | Saudi Gov Project</h4>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                            Social Insurance project. [cite_start]Architected centralized logging and secured APIs for government pension services[cite: 66, 68].
+                        </p>
+                        <ul class="text-sm text-slate-400 space-y-2 text-left">
+                            [cite_start]<li class="flex items-start"><i class="fas fa-check text-brand mt-1 mr-2"></i> Centralized logging (ELK Stack) for 50+ microservices[cite: 87].</li>
+                            [cite_start]<li class="flex items-start"><i class="fas fa-check text-brand mt-1 mr-2"></i> Engineered JWT-secured RESTful APIs[cite: 83].</li>
+                            [cite_start]<li class="flex items-start"><i class="fas fa-check text-brand mt-1 mr-2"></i> Reduced production bugs by 60% with JUnit testing[cite: 86].</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot">
+                        <i class="fas fa-tv text-brand text-xs"></i>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl hover:border-brand/50 transition duration-300">
+                        <span class="inline-block px-3 py-1 bg-purple-500/10 text-purple-400 text-xs font-bold rounded-full mb-3">2018 - 2020</span>
+                        <h3 class="text-xl font-bold text-white mb-1">Senior Software Engineer</h3>
+                        <h4 class="text-lg text-slate-300 mb-4">Chetu India | Digital Signage</h4>
+                        <p class="text-slate-400 text-sm mb-4">
+                            [cite_start]Integrated Magic INFO server with Samsung LEDs for digital signage across the USA[cite: 89, 91].
+                        </p>
+                        <ul class="text-sm text-slate-400 space-y-2 text-left">
+                            [cite_start]<li class="flex items-start"><i class="fas fa-check text-brand mt-1 mr-2"></i> Spring Data JPA & AWS DynamoDB integration[cite: 98, 101].</li>
+                            [cite_start]<li class="flex items-start"><i class="fas fa-check text-brand mt-1 mr-2"></i> Built Spring-based Java microservices[cite: 99].</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                 <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot">
+                        <i class="fas fa-network-wired text-brand text-xs"></i>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl hover:border-brand/50 transition duration-300">
+                        <span class="inline-block px-3 py-1 bg-brand/10 text-brand text-xs font-bold rounded-full mb-3">2015 - 2018</span>
+                        <h3 class="text-xl font-bold text-white mb-1">Senior Software Engineer</h3>
+                        <h4 class="text-lg text-slate-300 mb-4">UST Global | Network Monitoring</h4>
+                        <p class="text-slate-400 text-sm mb-4">
+                            [cite_start]Developed a system to integrate Zabbix server metrics for routers and switches[cite: 103, 106].
+                        </p>
+                        <ul class="text-sm text-slate-400 space-y-2 text-left">
+                            [cite_start]<li class="flex items-start"><i class="fas fa-check text-brand mt-1 mr-2"></i> Java/J2EE MVC Development[cite: 111].</li>
+                            [cite_start]<li class="flex items-start"><i class="fas fa-check text-brand mt-1 mr-2"></i> Integrated Kafka and ReactJS[cite: 114].</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-24 bg-cardDark">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-white mb-16" data-aos="fade-up">Tech Stack</h2>
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-6">
+                <div class="bg-bgDark p-6 rounded-xl text-center border border-slate-700 hover:border-brand transition group" data-aos="zoom-in">
+                    <i class="devicon-java-plain text-5xl text-red-500 mb-3 group-hover:scale-110 transition duration-300 block"></i>
+                    <span class="text-slate-300 font-medium">Java 17</span>
+                </div>
+                <div class="bg-bgDark p-6 rounded-xl text-center border border-slate-700 hover:border-brand transition group" data-aos="zoom-in" data-aos-delay="100">
+                    <i class="devicon-spring-original text-5xl text-green-500 mb-3 group-hover:scale-110 transition duration-300 block"></i>
+                    <span class="text-slate-300 font-medium">Spring Boot</span>
+                </div>
+                <div class="bg-bgDark p-6 rounded-xl text-center border border-slate-700 hover:border-brand transition group" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="devicon-angularjs-plain text-5xl text-red-600 mb-3 group-hover:scale-110 transition duration-300 block"></i>
+                    <span class="text-slate-300 font-medium">Angular</span>
+                </div>
+                <div class="bg-bgDark p-6 rounded-xl text-center border border-slate-700 hover:border-brand transition group" data-aos="zoom-in" data-aos-delay="300">
+                    <i class="devicon-amazonwebservices-original text-5xl text-orange-500 mb-3 group-hover:scale-110 transition duration-300 block"></i>
+                    <span class="text-slate-300 font-medium">AWS</span>
+                </div>
+                <div class="bg-bgDark p-6 rounded-xl text-center border border-slate-700 hover:border-brand transition group" data-aos="zoom-in" data-aos-delay="400">
+                    <i class="devicon-docker-plain text-5xl text-blue-500 mb-3 group-hover:scale-110 transition duration-300 block"></i>
+                    <span class="text-slate-300 font-medium">Docker</span>
+                </div>
+                <div class="bg-bgDark p-6 rounded-xl text-center border border-slate-700 hover:border-brand transition group" data-aos="zoom-in" data-aos-delay="500">
+                    <i class="devicon-kubernetes-plain text-5xl text-blue-600 mb-3 group-hover:scale-110 transition duration-300 block"></i>
+                    <span class="text-slate-300 font-medium">K8s</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-bgDark border-t border-slate-800 py-12 text-center">
+        <h2 class="text-2xl font-bold text-white mb-8">Let's Connect</h2>
+        <div class="flex justify-center gap-8 mb-8">
+            <a href="mailto:juned.alam.dev@gmail.com" class="text-slate-400 hover:text-brand text-3xl transition"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/moh-juned-alam-97336416b" class="text-slate-400 hover:text-blue-600 text-3xl transition"><i class="devicon-linkedin-plain"></i></a>
+            <a href="https://github.com/TechHorizonsByluned" class="text-slate-400 hover:text-white text-3xl transition"><i class="devicon-github-original"></i></a>
+        </div>
+        <p class="text-slate-500 text-sm">© 2025 Mohammad Juned Alam. Crafted with TailwindCSS.</p>
+    </footer>
+
+    <div class="fixed bottom-6 right-6 z-50">
+        <button id="chatToggle" class="w-14 h-14 bg-brand hover:bg-brandDark rounded-full shadow-lg flex items-center justify-center text-bgDark transition transform hover:scale-110">
+            <i class="fas fa-comment-dots text-2xl"></i>
+        </button>
+        
+        <div id="chatBox" class="chat-window hidden absolute bottom-20 right-0 w-80 h-96 rounded-xl flex-col overflow-hidden">
+            <div class="bg-slate-800 p-4 border-b border-slate-700 flex justify-between items-center">
+                <span class="font-bold text-brand">Juned's AI</span>
+                <button id="chatClose" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-900/50">
+                <div class="bg-slate-800 p-3 rounded-lg rounded-tl-none text-sm text-slate-200">
+                    Hi! Ask about my <b>Experience</b>, <b>Tech Stack</b>, or <b>Contact</b> info.
+                </div>
+            </div>
+            <div class="p-3 bg-slate-800 border-t border-slate-700 flex gap-2">
+                <input type="text" id="chatInput" placeholder="Type here..." class="flex-1 bg-slate-900 border border-slate-700 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-brand">
+                <button id="chatSend" class="text-brand hover:text-white"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Init AOS
+        AOS.init({ duration: 800, once: true });
+
+        // Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }, 500);
+        });
+
+        // Chatbot Logic
+        const toggle = document.getElementById('chatToggle');
+        const box = document.getElementById('chatBox');
+        const close = document.getElementById('chatClose');
+        const send = document.getElementById('chatSend');
+        const input = document.getElementById('chatInput');
+        const messages = document.getElementById('chatMessages');
+
+        const replies = {
+    'experience': "Juned has <b>10+ years</b> of experience, working with companies like **PepsiCo, Miratech, and Saudi Gov** projects[cite: 8, 22, 49, 69].",
+    'skills': "He specializes in **Java 17, Spring Boot, Angular, Docker, Kubernetes, AWS, and Kafka**[cite: 8, 13, 14].",
+    'contact': "Email: **juned.alam.dev@gmail.com** | Phone: **+91 9720880679**[cite: 3, 4].",
+    'default': "I can tell you about his **Experience**, **Skills**, or **Contact** info."
+};
+
+        function addMsg(text, isUser) {
+            const div = document.createElement('div');
+            div.className = isUser 
+                ? "bg-brand text-bgDark p-3 rounded-lg rounded-tr-none text-sm ml-auto w-fit font-medium" 
+                : "bg-slate-800 p-3 rounded-lg rounded-tl-none text-sm text-slate-200";
+            div.innerHTML = text;
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function handleSend() {
+            const txt = input.value.trim().toLowerCase();
+            if (!txt) return;
+            
+            addMsg(input.value, true);
+            input.value = '';
+
+            let replyText = replies.default;
+            if (txt.includes('exp') || txt.includes('work') || txt.includes('job')) replyText = replies.experience;
+            else if (txt.includes('skill') || txt.includes('tech') || txt.includes('stack')) replyText = replies.skills;
+            else if (txt.includes('contact') || txt.includes('mail') || txt.includes('phone')) replyText = replies.contact;
+
+            setTimeout(() => addMsg(replyText, false), 500);
+        }
+
+        toggle.onclick = () => box.classList.remove('hidden');
+        close.onclick = () => box.classList.add('hidden');
+        send.onclick = handleSend;
+        input.onkeypress = (e) => e.key === 'Enter' ? handleSend() : null;
+    </script>
+</body>
+</html>
